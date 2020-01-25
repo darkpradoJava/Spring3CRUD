@@ -20,14 +20,14 @@ public class UserController {
         this.userService = userService;
     }
 
-    @RequestMapping(value = "/users", method = RequestMethod.GET)
+    @GetMapping(value = "/users")
     public String printUsers(ModelMap model) {
         List<User> users = userService.getUsers();
         model.addAttribute("users", users);
         return "users";
     }
 
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/delete/{id}")
     public ModelAndView deleteUser(@PathVariable("id") Long id) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("redirect:/users");
@@ -38,14 +38,14 @@ public class UserController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    @GetMapping(value = "/add")
     public ModelAndView addPage(ModelMap model) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("edit");
         return modelAndView;
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @PostMapping(value = "/add")
     public ModelAndView addUser(@ModelAttribute("user") User user) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("redirect:/users");
@@ -53,7 +53,7 @@ public class UserController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/edit/{id}")
     public ModelAndView editUserPage(@PathVariable("id") Long id) {
         ModelAndView modelAndView = new ModelAndView();
         User tempUser = userService.getUserById(id);
@@ -63,7 +63,7 @@ public class UserController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    @PostMapping(value = "/edit")
     public ModelAndView editUser(@RequestParam(value = "id") Long id, @ModelAttribute("user") User user) {
         ModelAndView modelAndView = new ModelAndView();
         user.setId(id);
