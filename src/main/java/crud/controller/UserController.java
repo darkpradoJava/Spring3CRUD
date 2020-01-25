@@ -41,9 +41,6 @@ public class UserController {
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public ModelAndView addPage(ModelMap model) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("title", "Add user page");
-        modelAndView.addObject("h1", "Add new user");
-        modelAndView.addObject("submit", "Add new user");
         modelAndView.setViewName("edit");
         return modelAndView;
     }
@@ -59,13 +56,10 @@ public class UserController {
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public ModelAndView editUserPage(@PathVariable("id") Long id) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("title", "Edit user page");
         User tempUser = userService.getUserById(id);
-        modelAndView.addObject("h1", "Edit user with firstname \"" + tempUser.getFirstName()
-                + "\", lastname \"" + tempUser.getLastName() + "\", email \"" + tempUser.getEmail() + "\"");
+        modelAndView.addObject("user", tempUser);
         modelAndView.setViewName("edit");
         modelAndView.addObject("id", id);
-        modelAndView.addObject("submit", "Edit user");
         return modelAndView;
     }
 
